@@ -1,18 +1,22 @@
+from enum import Enum
 
+from business.valida_pincode import ValidaPincodeTorraTorra
+from business.valida_pincode import ValidaPincodeAtacadao
+from business.valida_pincode import ValidaPincodeConti
 
-class Pincode:
+class Pincode():
 
-    _client = None
-    _value = None
+    _validation_class = None
 
-    def __init__(self, client, _value):
-        self._client = client
-        self._value = _value
-
-    @property
-    def client(self):
-        return self._client
+    def __init__(self, validation):
+        self._validation_class = validation 
 
     @property
-    def value(self):
-        return self._value    
+    def validation_class(self):
+        return self._validation_class   
+
+
+class PincodeType(Enum):
+    TORRATORRA = Pincode(ValidaPincodeTorraTorra())
+    ATACADAO = Pincode(ValidaPincodeAtacadao())
+    CONTI = Pincode(ValidaPincodeConti())

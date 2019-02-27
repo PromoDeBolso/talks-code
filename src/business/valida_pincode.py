@@ -1,25 +1,33 @@
-from business.pincode import Pincode
-
 
 class ValidaPincode:
+    
+    @staticmethod
+    def valida(value):
+        raise NotImplementedError
 
-    def valida(self, pincode: Pincode):
-        
-        if pincode.client == 'atacadao':
-            return self.__valida_atacadao(pincode)
-        elif pincode.client == 'torratorra':
-            return self.__valida_torra(pincode)
 
-        raise Exception('INVALID PINCODE TYPE')    
+class ValidaPincodeTorraTorra(ValidaPincode):
 
     @staticmethod
-    def __valida_atacadao(pincode):
-        if(len(pincode.value)) != 27:
+    def valida(value):
+        if(len(value)) != 10:
+            return False
+        return True   
+
+class ValidaPincodeAtacadao(ValidaPincode):
+
+    @staticmethod
+    def valida(value):
+        if(len(value)) != 27:
             return False
         return True
 
+
+class ValidaPincodeConti(ValidaPincode):
+    
     @staticmethod
-    def __valida_torra(pincode):
-        if(len(pincode.value)) != 10:
+    def valida(value):
+        if(len(value)) != 12:
             return False
-        return True        
+        return True
+
